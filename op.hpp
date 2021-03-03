@@ -18,11 +18,14 @@ class Op : public Base {
         	virtual std::string stringify(){
 			return std::to_string(value);
 		}
-		int number_of_children(){
+		virtual int number_of_children(){
                         return 0;
                 }
-		Base* get_child(int i){
+		virtual Base* get_child(int i){
 			return nullptr;
+		}
+		virtual void accept(Visitor* visitor, int index){
+			visitor->visit_op(this); 
 		}
 };
 

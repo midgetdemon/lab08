@@ -19,10 +19,10 @@ class Pow : public Base{
 		std::string stringify(){
 			return "(" + left->stringify() + "**" + right->stringify() + ")"; 
 		}
-		int number_of_children(){
+		virtual int number_of_children(){
                         return 2;
                 }
-                Base* get_child(int i){
+                virtual Base* get_child(int i){
                         if (i == 0){
                                 return left;
                         }
@@ -30,6 +30,17 @@ class Pow : public Base{
                                 return right;
                         }
                         return nullptr;
+                }
+		virtual void accept (Visitor* visitor, int index){
+                        if (index == 0){
+                                visitor->visit_pow_begin(this);
+                        }
+                        else if (index == 1){
+                                visitor->visit_pow_middle(this);
+                        }
+                        else {
+                                visitor->visit_pow_end(this);
+                        }
                 }
 };
 #endif  
