@@ -18,5 +18,8 @@ class Rand : public Base {
 		virtual std::string stringify(){
 			return std::to_string(randVal);
 		}
+		int number_of_children(){
+			return 0;
+		}
 };
 #endif 

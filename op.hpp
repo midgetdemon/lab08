@@ -18,6 +18,9 @@ class Op : public Base {
         	virtual std::string stringify(){
 			return std::to_string(value);
 		}
+		int number_of_children(){
+                        return 0;
+                }
 };
 
 #endif //__OP_HPP__
