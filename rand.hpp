@@ -21,5 +21,8 @@ class Rand : public Base {
 		int number_of_children(){
 			return 0;
 		}
+		Base* get_child(int i){
+			return nullptr;
+		}
 };
 #endif 
