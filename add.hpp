@@ -1,4 +1,4 @@
-fndef __ADD_HPP__
+#ifndef __ADD_HPP__
 #define __ADD_HPP__
 
 #include "base.hpp"
@@ -18,6 +18,19 @@ class Add: public Base{
 		std::string stringify(){
 			return "(" + left->stringify() + "+" + right->stringify() + ")";
 		}
+		int number_of_children(){
+			return 2; 	
+		}
+		Base* get_child(int i){
+			if (i == 0){
+				return left; 
+			}
+			if (i == 1){
+				return right;
+			}
+			return nullptr; 
+		}
+
 };
 
 #endif
