@@ -107,7 +107,7 @@ TEST(LatexTest, Basic){
 	EXPECT_EQ(PrintLaTeX(test), "${({1}+{({5}-{0})})}$"); 	
 
 }
-**/	
+
 TEST(LatexTest, Basic){
         Base* test2 = new Pow(new Op(5), new Op(2));
         EXPECT_EQ(PrintLaTeX(test2), "${({1}+{({5}-{0})})}$");   
@@ -127,14 +127,29 @@ TEST(MathMLTest, Basic){
   </apply>
 </math>"); 
 }
+**/
+TEST(VisitorTests, SimpleExpressions){
+  Base* simpleAdd = new Add(new Op(3), new Op(4));
+  EXPECT_EQ("${({3.000000}+{4.000000})}$", PrintLaTeX(simpleAdd));
+  EXPECT_EQ("<math>\n <apply>\n  <plus/>\n  <cn>3.000000</cn>\n  <cn>4.000000</cn>\n </apply>\n</math>", PrintMathML(simpleAdd));
+  Base* simpleDiv = new Div(new Op(8), new Op(4));
+  EXPECT_EQ("${\\frac{8.000000}{4.000000}}$", PrintLaTeX(simpleDiv));
+  EXPECT_EQ("<math>\n <apply>\n  <divide/>\n  <cn>8.000000</cn>\n  <cn>4.000000</cn>\n </apply>\n</math>", PrintMathML(simpleDiv));
+  Base* simpleMult = new Mult(new Op(3), new Op(6));
+  EXPECT_EQ("${({3.000000}\\cdot{6.000000})}$", PrintLaTeX(simpleMult));
+  EXPECT_EQ("<math>\n <apply>\n  <times/>\n  <cn>3.000000</cn>\n  <cn>6.000000</cn>\n </apply>\n</math>", PrintMathML(simpleMult));
+  Base* simplePow = new Pow(new Op(6), new Op(2));
+  EXPECT_EQ("${({6.000000}^{2.000000})}$", PrintLaTeX(simplePow));
+  EXPECT_EQ("<math>\n <apply>\n  <power/>\n  <cn>6.000000</cn>\n  <cn>2.000000</cn>\n </apply>\n</math>", PrintMathML(simplePow));
+  Base* simpleSub = new Sub(new Op(7), new Op(5));
+  EXPECT_EQ("${({7.000000}-{5.000000})}$", PrintLaTeX(simpleSub));
+  EXPECT_EQ("<math>\n <apply>\n  <minus/>\n  <cn>7.000000</cn>\n  <cn>5.000000</cn>\n </apply>\n</math>", PrintMathML(simpleSub));
+}
 
-
-
-
-
-
-
-
-
+TEST(VisitorTests, ComplexExpressions){
+  Base* complex1 = new Mult(new Div(new Op(4), new Op(2)), new Pow(new Op(2), new Op(3)));
+  EXPECT_EQ("${({\\frac{4.000000}{2.000000}}\\cdot{({2.000000}^{3.000000})})}$", PrintLaTeX(complex1));
+  EXPECT_EQ("<math>\n <apply>\n  <times/>\n  <apply>\n   <divide/>\n   <cn>4.000000</cn>\n   <cn>2.000000</cn>\n  </apply>\n  <apply>\n   <power/>\n   <cn>2.000000</cn>\n   <cn>3.000000</cn>\n  </apply>\n </apply>\n</math>", PrintMathML(complex1));
+}
 
 #endif

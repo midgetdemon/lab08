@@ -13,6 +13,7 @@ ADD_EXECUTABLE(examples
 
 ADD_EXECUTABLE(test
 	unit_test.cpp
+	iterator.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)

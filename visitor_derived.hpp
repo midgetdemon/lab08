@@ -138,7 +138,7 @@ class VisitMathML : public Visitor{
       expression += "<apply>\n";
       indent+=1;
       addIndent();
-      expression += "<sub/>\n";
+      expression += "<minus/>\n";
     }
     virtual void visit_sub_middle(Sub* node){
       expression += "";
