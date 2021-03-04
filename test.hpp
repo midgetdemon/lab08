@@ -160,6 +160,10 @@ TEST(VisitorTests, ComplexExpressions){
   EXPECT_EQ("${({2.000000}^{({({3.000000}-{2.000000})}+{5.000000})})}$", PrintLaTeX(complex2));
   EXPECT_EQ("<math>\n <apply>\n  <power/>\n  <cn>2.000000</cn>\n  <apply>\n   <plus/>\n   <apply>\n    <minus/>\n    <cn>3.000000</cn>\n    <cn>2.000000</cn>\n   </apply>\n   <cn>5.000000</cn>\n  </apply>\n </apply>\n</math>", PrintMathML(complex2));
   delete complex2;
+  Base* complex3 = new Add(new Sub(new Op(7), new Op(9)), new Mult(new Div(new Op(6), new Op(3)), new Op(8)));
+  EXPECT_EQ("${({({7.000000}-{9.000000})}+{({\\frac{6.000000}{3.000000}}\\cdot{8.000000})})}$", PrintLaTeX(complex3));
+  EXPECT_EQ("<math>\n <apply>\n  <plus/>\n  <apply>\n   <minus/>\n   <cn>7.000000</cn>\n   <cn>9.000000</cn>\n  </apply>\n  <apply>\n   <times/>\n   <apply>\n    <divide/>\n    <cn>6.000000</cn>\n    <cn>3.000000</cn>\n   </apply>\n   <cn>8.000000</cn>\n  </apply>\n </apply>\n</math>", PrintMathML(complex3));
+  delete complex3;
 }
 
 #endif
