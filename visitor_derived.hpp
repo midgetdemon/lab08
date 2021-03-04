@@ -84,7 +84,10 @@ std::string PrintLaTeX(Base* ptr){
     it->next();
   }
   myVisitor->expression += "$";
-  return myVisitor->getExpression(); 
+  std::string myExpression = myVisitor->getExpression();
+  delete myVisitor;
+  delete it; 
+  return myExpression; 
 }
 
 class VisitMathML : public Visitor{
@@ -202,5 +205,8 @@ std::string PrintMathML(Base* ptr){
     it->next();  
   }
   myVisitor->expression += "</math>";
-  return myVisitor->getExpression(); 
+  std::string myExpression = myVisitor->getExpression();
+  delete myVisitor;
+  delete it;
+  return myExpression; 
 }

@@ -16,6 +16,10 @@ class Div : public Base {
 				throw std::invalid_argument("Divide by zero");
 			}
 		}
+		~Div(){
+			delete left;
+			delete right;
+		}
 		virtual double evaluate(){
 			return left->evaluate()/right->evaluate();
 		}
