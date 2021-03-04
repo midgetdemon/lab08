@@ -35,24 +35,7 @@ class Visitor{
         virtual void visit_div_end(Div* node) = 0;
         virtual void visit_pow_begin(Pow* node) = 0;
         virtual void visit_pow_middle(Pow* node) = 0;
-        virtual void visit_pow_end(Pow* node) = 0
+        virtual void visit_pow_end(Pow* node) = 0;
 };
-
-//not complete 
-class VisitorLaTeX : public Visitor{
-	public:
-		std::string PrintLaTeX(Base* ptr){
-			std::string expression = "";
-			//Visitor* visitor = new Visitor(); 
-			Iterator* it = new iterator (ptr); 
-			while (!(it->is_done())){
-				ptr->accept(this, it->current_index()); 
-				expression += "{" + it->current_node()->stringify() + "}"; 
-				it->next();  
-			}
-			return "${" + expression + "}$"; 
-		}
-		
-}; 
 
 #endif //__VISITOR_HPP__
