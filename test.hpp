@@ -1,5 +1,5 @@
-#ifndef __ADD_TEST_HPP__
-#define __ADD_TEST_HPP__
+#ifndef __TEST_HPP__
+#define __TEST_HPP__
 
 #include "gtest/gtest.h"
 #include "add.hpp"
@@ -9,7 +9,8 @@
 #include "sub.hpp"
 #include "rand.hpp"
 #include "pow.hpp"
-
+#include "visitor.hpp"
+#include "visitor_derived.hpp"
 
 TEST(AddTest, GetChild){
 	Op* one = new Op(5);
@@ -100,5 +101,40 @@ TEST(RandTest, NumChildren){
         Rand* test = new Rand(); 
         EXPECT_EQ(test->number_of_children(), 0);
 }
+/**
+TEST(LatexTest, Basic){
+	Base* test = new Add(new Op(1), new Sub(new Op(5), new Op(0)));
+	EXPECT_EQ(PrintLaTeX(test), "${({1}+{({5}-{0})})}$"); 	
+
+}
+**/	
+TEST(LatexTest, Basic){
+        Base* test2 = new Pow(new Op(5), new Op(2));
+        EXPECT_EQ(PrintLaTeX(test2), "${({1}+{({5}-{0})})}$");   
+}
+
+TEST(MathMLTest, Basic){
+	Base* test = new Add(new Op(1), new Sub(new Op(5), new Op(0)));
+	EXPECT_EQ(PrintMathML(test), "<math>
+  <apply>
+    <plus/>
+    <cn>1</cn>
+    <apply>
+      <minus/>
+      <cn>5</cn>
+      <cn>0</cn>
+    </apply>
+  </apply>
+</math>"); 
+}
+
+
+
+
+
+
+
+
+
 
 #endif
